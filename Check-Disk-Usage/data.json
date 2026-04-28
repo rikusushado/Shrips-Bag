@@ -1,0 +1,39 @@
+{
+    "arg" :
+    {
+        "key" :
+        [
+            "--install",
+            "--reinstall",
+            "--update",
+            "-c=",
+            "-n=",
+            "-t=",
+            "-u="
+        ]
+    }
+    ,
+    "env" :
+    [
+    ["/var/lang", 
+        [ 
+            ["/en", "/es", "/cat"],
+            "/check-disk-usage/heading.md" 
+        ]
+    ],
+        [
+            "/var/log/check-disk-usage"
+        ]
+    ],
+    "lang":
+    {
+        "en" : ["English"],
+        "es" : ["Español"],
+        "cat" : ["Català"]
+    },
+    "depend" :
+    [
+        "ssh",
+        "wget"
+    ]
+}
