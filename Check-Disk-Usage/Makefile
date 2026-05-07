@@ -1,15 +1,27 @@
-py-file:=./CheckDiskUsage.py
-test: $(py-file)
-	python3 $(py-file)
+src-dir:=./src
+src:=tree -Ffina --noreport\ 
+	$(src-dir) |\ 
+ 	grep -v /$ |\ 
+	 tr '\n' ' '
 
-ifile:=./dist/CheckDiskUsage
-ofile:=./dist/check-disk-usage
-build: $(py-file) $(ifile) $(ofile)
-	pyinstaller --onefile $(py-file)
-	mv $(ifile) $(ofile)
-	chmod +x $(ofile)
+header-dir:=./"include"
 
-run: $(ofile)
-	exec $(ofile)
+headers:=tree -Ffina --noreport\ 
+	$(header-dir) |\ 
+ 	grep -v /$ |\ 
+	 tr '\n' ' '
 
-debug: build run
+out:=./build/check-disk-usage
+
+flags:=-s -Wl,-emain -Os
+
+build: $(out) $(src) $(headers) $(flags)
+	-o $(out)\ 
+	$(src)\ 
+	$(headers)\ 
+	$(flags)
+
+run: $(out)
+	exec $(out)
+
+all: build run
