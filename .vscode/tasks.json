@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "make",
+			"targetName": "all",
+			"makeFileRelativePath": "Check-Disk-Usage/Makefile",
+			"problemMatcher": [],
+			"label": "make: all",
+			"detail": "./Check-Disk-Usage/Makefile",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
