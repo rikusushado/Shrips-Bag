@@ -1,0 +1,57 @@
+{
+    "all" :
+    {
+        "script-dir" : "py/build",
+        "script-names" :
+        [
+            "disk_usage.py",
+            "update_wp.py"
+        ]
+    },
+    "disk-usage" :
+    {
+        "debug" :
+        [
+
+        ],
+        "release" :
+        [
+
+        ],
+        "packed" :
+        [
+
+        ],
+        "compressed" :
+        [
+
+        ],
+        "tiny" :
+        [
+
+        ]
+    },
+    "update-wp" :
+    {
+        "debug" :
+        [
+
+        ],
+        "release" :
+        [
+
+        ],
+        "packed" :
+        [
+
+        ],
+        "compressed" :
+        [
+
+        ],
+        "tiny" :
+        [
+
+        ]
+    }
+}
