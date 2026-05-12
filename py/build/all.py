@@ -7,10 +7,10 @@ arguments = validateArguments(valid_arguments, sys.argv)
 
 cmd_data = getJSONData("data/build.json", "all", False, "command")
 
-def build(array, mode = "debug"):
+def build(array):
     script_dir = cmd_data.get("script-dir")
     for script in cmd_data.get("script-names"):
-        command = f"../../{script_dir}/{script} mode {mode}"
+        command = f"../../{script_dir}/{script}"
         subprocess.run(["python3", command])
     
 build(cmd_data, arguments[0])

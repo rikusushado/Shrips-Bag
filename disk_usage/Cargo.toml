@@ -1,0 +1,11 @@
+[package]
+name = "disk-usage"
+version = "0.0.1"
+authors = "Rikusu Shado"
+edition = "2024"
+description = "Read disk usage of a remote or local server"
+
+[profile.release]
+strip = true
+opt-level = "z"
+codegen-units = 1

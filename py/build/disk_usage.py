@@ -7,8 +7,8 @@ arguments = validateArguments(valid_arguments, sys.argv)
 
 cmd_data = getJSONData("data/build.json", "disk-usage", False, "command")
 
-def build(array, mode = "debug"):            
-    command = commands.get(mode)
+def build(array):            
+    command = cmd_data 
 
     subprocess.run(command)
     

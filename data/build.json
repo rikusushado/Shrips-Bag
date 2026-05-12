@@ -10,48 +10,14 @@
     },
     "disk-usage" :
     {
-        "debug" :
-        [
-
-        ],
-        "release" :
-        [
-
-        ],
-        "packed" :
-        [
-
-        ],
-        "compressed" :
-        [
-
-        ],
-        "tiny" :
-        [
-
+	[
+	    "./disk_usage/rust.sh"	
         ]
     },
     "update-wp" :
     {
-        "debug" :
         [
-
-        ],
-        "release" :
-        [
-
-        ],
-        "packed" :
-        [
-
-        ],
-        "compressed" :
-        [
-
-        ],
-        "tiny" :
-        [
-
-        ]
+	       "./wp_update/rust.sh"	
+	]
     }
 }
