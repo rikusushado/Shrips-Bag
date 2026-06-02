@@ -1,2 +1,59 @@
 # Shrips Bag
 A bag full of tasty shrisps tools for easier automated system management!
+
+# What is it?
+Shrips Bag is a server management toolbox that aims for an easy and automated aproach. This means that the system admins should not be doing manual procedures for executing the monitoring and maintainment, if this toolbox is installed and setted up successfuly.
+
+# Why should I install this?
+As we previously said, the systems with these tools installed are faster and easier to manage, resulting in more time for the admins to attend incidents on the same system or to develop future projects.
+
+Also, this toolbox provides a human-readable way of reporting warnings and errors to a Zulip chat, to avoid mistakes related to a lack of communication.
+
+This is an opensource project where you can read the code for better understanding of what the community and you are installing.
+
+Finally, you can purpose what should we add, how do we implement it as a community. We will dedicate a file to give credits to all contributors and what did they implemented.
+
+# INSTALATION GUIDE
+If you are installing from flatpak, you can skip the steps of the manual install from source code.
+
+### Dependencies
+- Build Essential
+- Rustup
+- Cargo
+
+### Download
+You can download an specific source code from the releases or execute the follwing command for cloning the repository:
+```
+git clone https://github.com/rikusushado/Shrips-Bag.git
+```
+
+If you are using a GNU/Linux and you have downloaded the source code from a release, you can execute the following command in the directory where the download is located:
+```
+mkdir Shrips-Bag && tar -xvzf shrips-bag-*.tar.gz -C Shrips-Bag --strip-components=1
+```
+
+### Build and Install
+Once the dependencies are met, and the source code is downloaded and extracted, you can execute the following commands for finishing the installation process:
+```
+cd Shrips-Bag
+make all
+sudo make install
+```
+
+### Reinstalling and uninstalling
+If you did a mistake in the installation process, you want to update, or simply you didn't like the toolbox. We provide the commands to reinstall and uninstall the toolbox easily, as we show below:
+
+- Reinstall
+```
+sudo make reinstall
+```
+
+- Uninstall
+```
+sudo make uninstall
+```
+
+**(Remember that you must be inside the downloaded source code containing directory to execute those commands)**
+
+## Miscelaneous
+Thanks to [Lliure Tic](https://lliuretic.cat) for the idea and support to the project! 😁
