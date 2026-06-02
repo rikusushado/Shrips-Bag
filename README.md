@@ -1,10 +1,10 @@
 # Shrips Bag
 A bag full of tasty shrisps tools for easier automated system management!
 
-# What is it?
+## What is it?
 Shrips Bag is a server management toolbox that aims for an easy and automated aproach. This means that the system admins should not be doing manual procedures for executing the monitoring and maintainment, if this toolbox is installed and setted up successfuly.
 
-# Why should I install this?
+## Why should I install this?
 As we previously said, the systems with these tools installed are faster and easier to manage, resulting in more time for the admins to attend incidents on the same system or to develop future projects.
 
 Also, this toolbox provides a human-readable way of reporting warnings and errors to a Zulip chat, to avoid mistakes related to a lack of communication.
@@ -13,7 +13,7 @@ This is an opensource project where you can read the code for better understandi
 
 Finally, you can purpose what should we add, how do we implement it as a community. We will dedicate a file to give credits to all contributors and what did they implemented.
 
-# INSTALATION GUIDE
+## INSTALATION GUIDE
 If you are installing from flatpak, you can skip the steps of the manual install from source code.
 
 ### Dependencies
