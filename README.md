@@ -30,7 +30,7 @@ git clone https://github.com/rikusushado/Shrips-Bag.git
 
 If you are using a GNU/Linux and you have downloaded the source code from a release, you can execute the following command in the directory where the download is located:
 ```
-mkdir Shrips-Bag && tar -xvzf shrips-bag-*.tar.gz -C Shrips-Bag
+mkdir Shrips-Bag && tar -xvzf Shrips-Bag-*.tar.gz -C Shrips-Bag
 ```
 
 ### Build and Install
