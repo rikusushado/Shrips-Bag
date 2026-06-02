@@ -17,9 +17,10 @@ Finally, you can purpose what should we add, how do we implement it as a communi
 If you are installing from flatpak, you can skip the steps of the manual install from source code.
 
 ### Dependencies
+- Cargo
+- Curl
 - Build Essential
 - Rustup
-- Cargo
 
 ### Download
 You can download an specific source code from the releases or execute the follwing command for cloning the repository:
@@ -29,7 +30,7 @@ git clone https://github.com/rikusushado/Shrips-Bag.git
 
 If you are using a GNU/Linux and you have downloaded the source code from a release, you can execute the following command in the directory where the download is located:
 ```
-mkdir Shrips-Bag && tar -xvzf shrips-bag-*.tar.gz -C Shrips-Bag --strip-components=1
+mkdir Shrips-Bag && tar -xvzf shrips-bag-*.tar.gz -C Shrips-Bag
 ```
 
 ### Build and Install
