@@ -1,0 +1,31 @@
+[package]
+name = "shrip-disk-usage"
+version = "0.0.1"
+authors = ["Rikusu Shado"]
+edition = "2024"
+description = "Check disk usage of a server and notify about high usage using a message bot"
+
+
+
+[[bin]]
+name = "disk_usage"
+path = "./src/main.rs"
+
+[profile.release]
+strip = true
+opt-level = "z"
+codegen-units = 1
+lto = true
+panic = "abort"
+
+[dependencies]
+shellexpand = "3.1.0"
+utils = { path = "../../utils" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = "0.4"
+ssh2 = { version = "0.9.5", features = ["vendored-openssl"] }
+
+
+
+

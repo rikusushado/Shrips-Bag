@@ -1,28 +1,45 @@
-all: build-all
+all: prepare-build-env shrips cli-tools
+
+shrips: disk-usage
+
+disk-usage:
+	RUSTFLAGS="-Zfmt-debug=none -Zlocation-detail=none" \
+	cargo +nightly build \
+	-Z build-std=std,panic_abort \
+	-Z build-std-features="optimize_for_size" \
+	--release --manifest-path \
+	./shrips/disk_usage/Cargo.toml
+	rm -rf ./build
+	mkdir -p ./build/bin
+	mkdir -p ./build/config/disk-usage
+	mkdir -p ./build/lang/disk-usage
+	yes | cp -rf ./shrips/disk_usage/resources/config/* ./build/config/disk-usage
+	yes | cp -rf ./shrips/disk_usage/resources/lang/* ./build/lang/disk-usage
+	yes | cp -rf ./shrips/disk_usage/target/release/disk_usage ./build/bin/disk-usage
 
 
-##########################
-## DEFALT VALS SECTION  ##
-##########################
-mode = 'debug'
-mode_file = /tmp/build.dat
-
-##########################
-## SCRIPT PATH SECTION  ##
-##########################
-build-script-dir = ./py/build
-build-all-script = $(build-script-dir)/all.py
-update-wp-script = $(build-script-dir)/update-wp.py
+prepare-build-env:
+	rustup toolchain install nightly
+	rustup component add rust-src --toolchain nightly
+	mkdir -p ./build/config
+	mkdir -p ./build/lang
 
 
-##########################
-## SCRIPT CALL SECTION  ##
-##########################
-build-all: $(build-all-script)
-	python3 $(build-all-script)
+cli-tools:
+	yes | cp -rf ./cli_tools/* ./build/bin
 
-update-wp: $(update-wp-script)
-	python3 $(update-wp-script)
 
-disk-usage: $(update-wp-script)
-	python3 $(update-wp-script)
+install:
+	mkdir -p /opt/shrips-bag
+	cp -r ./build/* /opt/shrips-bag
+	chmod +x -R /opt/shrips-bag/bin
+	sudo ln -s /opt/shrips-bag/bin/wrapper.sh /usr/local/bin/shrips-bag
+
+reinstall:
+	mkdir -p /opt/shrips-bag
+	chmod +x -R /opt/shrips-bag/bin
+	yes | cp -rf ./build/* /opt/shrips-bag
+
+uninstall:
+	sudo rm /usr/local/bin/shrips-bag
+	sudo rm -r /opt/shrips-bag
