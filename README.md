@@ -14,6 +14,9 @@ This is an opensource project where you can read the code for better understandi
 Finally, you can purpose what should we add, how do we implement it as a community. We will dedicate a file to give credits to all contributors and what did they implemented.
 
 ## SOURCE INSTALATION GUIDE
+=======
+If you are installing from Docker, you can skip the steps of the manual install from source code.
+
 ### Dependencies
 #### Only needed for build
 - Cargo
