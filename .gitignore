@@ -416,3 +416,19 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+<<<<<<< HEAD
+
+# Irrelevant Cargo files and directories
+Cargo.lock
+/target
+
+# Cargo objects
+stderr
+stdout
+CACHEDIR.TAG
+.rustc_info.json
+
+# Build tests
+build/
+=======
+>>>>>>> 790ddf65bbad70e5fa6851e788c44ae10e96ffa7
