@@ -19,8 +19,6 @@ disk-usage:
 
 
 prepare-build-env:
-	rustup toolchain install nightly
-	rustup component add rust-src --toolchain nightly
 	mkdir -p ./build/config
 	mkdir -p ./build/lang
 
@@ -30,15 +28,15 @@ cli-tools:
 
 
 install:
-	mkdir -p /opt/shrips-bag
-	cp -r ./build/* /opt/shrips-bag
-	chmod +x -R /opt/shrips-bag/bin
+	sudo mkdir -p /opt/shrips-bag
+	sudo cp -r ./build/* /opt/shrips-bag
+	sudo chmod +x -R /opt/shrips-bag/bin
 	sudo ln -s /opt/shrips-bag/bin/wrapper.sh /usr/local/bin/shrips-bag
 
 reinstall:
-	mkdir -p /opt/shrips-bag
-	chmod +x -R /opt/shrips-bag/bin
-	yes | cp -rf ./build/* /opt/shrips-bag
+	sudo mkdir -p /opt/shrips-bag
+	sudo chmod +x -R /opt/shrips-bag/bin
+	yes | sudo cp -rf ./build/* /opt/shrips-bag
 
 uninstall:
 	sudo rm /usr/local/bin/shrips-bag
