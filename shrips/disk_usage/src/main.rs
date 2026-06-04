@@ -21,8 +21,9 @@ use std::path::Path;
 use ssh2::{Session};
 use ssh2;
 
-fn execute_remote(address: &str, port: &str, key_path: &str,
+fn execute_remote(address: &str, port: &u16, key_path: &str,
     user: &str, command: &str, outstream: &mut String)   -> Result<(), Box<dyn std::error::Error>> {
+        println!("{}:{}", address, port);
         let tcp = TcpStream::connect(format!("{}:{}", address, port))?;
 
         let mut sess = Session::new()?;
@@ -73,6 +74,32 @@ fn read_file(path: &str) -> String {
     content
 }
 
+fn filter_percentage(input: String) -> String {
+    let mut numbers: Vec<char> = Vec::new();
+    let mut count: u8 = 0;
+
+    for c in input.chars() {
+        if count == 3 {
+            count -= 1;
+            numbers.drain(..1);
+        }
+        if c == '%' && count > 0 {
+            break;
+        }
+        if c.is_numeric() {
+            count += 1;
+            numbers.push(c);
+        } else {
+            count = 0;
+            numbers.clear();
+        }
+    }
+
+    let digit: String = numbers.into_iter().collect();
+    let pcent: String = format!("{}", digit);
+    return pcent
+}
+
 fn load_config() -> data_struct::ConfigFile {
     let init_path = "/opt/shrips-bag/config/disk-usage/init.json";
     let init_file = &read_file(&init_path);
@@ -110,7 +137,7 @@ fn load_config() -> data_struct::ConfigFile {
 }
 
 fn read_usage(target: &data_struct::Target, trigger: &u8, high: &mut bool) -> HashMap<String, String> {
-    let read_command = " df --output=pcent /";
+    let read_command = "df --output=pcent /";
 
     let mut name_command = HashMap::new();
     let mut name_usage: HashMap<String, String> = HashMap::new();
@@ -132,13 +159,13 @@ fn read_usage(target: &data_struct::Target, trigger: &u8, high: &mut bool) -> Ha
     for (key, cmd) in &name_command {
         let mut output = String::new();
 
-        let _ =execute_remote(&cmd[0], &cmd[1], &cmd[2], &cmd[3], &cmd[4], &mut output);
+        let _ = execute_remote(&cmd[0], &cmd[1].parse::<u16>().unwrap(), &cmd[2], &cmd[3], &cmd[4], &mut output);
 
-        let lookup: String = output.chars().filter(|c| c.is_ascii_digit()).collect();
+        let pcent: String = filter_percentage(output);
 
-        if let Ok(lookup_value) = lookup.parse::<u8>() {
+        if let Ok(lookup_value) = pcent.parse::<u8>() {
             if lookup_value >= *trigger {
-                name_usage.insert(key.clone(), lookup);
+                name_usage.insert(key.clone(), pcent);
                 *high = true;
             }
         }
