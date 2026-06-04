@@ -18,8 +18,9 @@ If you are installing from Docker, you can skip the steps of the manual install 
 
 ### Dependencies
 #### Only needed for build
-- Cargo
 - Build Essential
+- Cargo
+- Musl Develop Tools
 - Rustup
 - Rust Nightly
 

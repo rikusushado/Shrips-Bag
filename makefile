@@ -3,8 +3,8 @@ all: prepare-build-env shrips cli-tools
 shrips: disk-usage
 
 disk-usage:
-	RUSTFLAGS="-Zfmt-debug=none -Zlocation-detail=none" \
-	cargo +nightly build \
+	RUSTFLAGS="-Z unstable-options -Zfmt-debug=none -Zlocation-detail=none" \
+	cargo +nightly build --target x86_64-unknown-linux-musl \
 	-Z build-std=std,panic_abort \
 	-Z build-std-features="optimize_for_size" \
 	--release --manifest-path \
@@ -15,7 +15,7 @@ disk-usage:
 	mkdir -p ./build/lang/disk-usage
 	yes | cp -rf ./shrips/disk_usage/resources/config/* ./build/config/disk-usage
 	yes | cp -rf ./shrips/disk_usage/resources/lang/* ./build/lang/disk-usage
-	yes | cp -rf ./shrips/disk_usage/target/release/disk_usage ./build/bin/disk-usage
+	yes | cp -rf ./shrips/disk_usage/target/x86_64-unknown-linux-musl/release/disk_usage ./build/bin/disk-usage
 
 
 prepare-build-env:
