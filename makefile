@@ -3,12 +3,11 @@ all: prepare-build-env shrips cli-tools
 shrips: disk-usage
 
 disk-usage:
-	RUSTFLAGS="-Z unstable-options -Zfmt-debug=none -Zlocation-detail=none" \
+	RUSTFLAGS="-Z unstable-options -Zfmt-debug=none -Zlocation-detail=none -Ctarget-feature=-crt-static" \
 	cargo +nightly build --target x86_64-unknown-linux-musl \
 	-Z build-std=std,panic_abort \
 	-Z build-std-features="optimize_for_size" \
-	--release --manifest-path \
-	./shrips/disk_usage/Cargo.toml
+	--release --manifest-path ./shrips/disk_usage/Cargo.toml
 	rm -rf ./build
 	mkdir -p ./build/bin
 	mkdir -p ./build/config/disk-usage
