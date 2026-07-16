@@ -1,5 +1,0 @@
-{
-    "rust-analyzer.linkedProjects": [
-        "./utils/rukky_types/Cargo.toml"
-    ]
-}   

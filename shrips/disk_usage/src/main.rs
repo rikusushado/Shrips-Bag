@@ -21,6 +21,8 @@ use std::path::Path;
 use ssh2::{Session};
 use ssh2;
 
+use rukky_remote::ssh_test;
+
 fn execute_remote(address: &str, port: &u16, key_path: &str,
     user: &str, command: &str, outstream: &mut String)   -> Result<(), Box<dyn std::error::Error>> {
         println!("{}:{}", address, port);
@@ -243,6 +245,8 @@ fn send_message(zulip: &data_struct::Zulip, message: &String) {
 }
 
 fn main() {
+    ssh_test();
+
     let config = load_config();
     let mut high = false;
     let name_usage = read_usage(&config.target, &config.global.usage_trigger, &mut high);
