@@ -1,10 +1,8 @@
-#include <iostream>
 #include "ShripsBag/shripssh.hpp"
 
 ssh_session ShripSsh::createSession() {
     ssh_session session = ssh_new();
     if (session == nullptr) {
-        std::cerr << "Could not create SSH session." << std::endl;
     }
 
     return session;
@@ -26,20 +24,18 @@ void ShripSsh::authenticate(ssh_session session, ssh_key pubkey) {
     ec = ssh_userauth_publickey(session, nullptr, pubkey);
 
     if (ec != SSH_AUTH_SUCCESS) {
-        std::cerr << "Failed to authenticate." << std::endl;
         ssh_free(session);
     }
 
     ec = ssh_connect(session);
     if (ec != SSH_OK) {
-        std::cerr << "Failed to connect." << std::endl;
         ssh_free(session);
         ssh_key_free(pubkey);
     }
 }
 
 
-void ShripSsh::sessionClose(ssh_channel channel, ssh_session session, ssh_key pubkey) {
+void ShripSsh::sessionClose(ssh_session session, ssh_channel channel, ssh_key pubkey) {
     ssh_channel_free(channel);
     ssh_disconnect(session);
     ssh_free(session);

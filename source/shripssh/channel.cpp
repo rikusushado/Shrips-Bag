@@ -1,11 +1,9 @@
-#include <iostream>
 #include "ShripsBag/shripssh.hpp"
 
 ssh_channel ShripSsh::createChannel(ssh_session session) {
     ssh_channel channel = ssh_channel_new(session);
 
     if (channel == nullptr) {
-        std::cerr << "Failed to create SSH channel." << std::endl;
         ssh_disconnect(session);
         ssh_free(session);
     }
@@ -13,13 +11,12 @@ ssh_channel ShripSsh::createChannel(ssh_session session) {
     return channel;
 }
 
-void ShripSsh::channelOpen(ssh_channel channel, ssh_session session) {
+void ShripSsh::channelOpen(ssh_session session, ssh_channel channel) {
     int ec;
 
     ec = ssh_channel_open_session(channel);
 
     if (ec != SSH_OK) {
-        std::cerr << "Failed to open SSH channel." << std::endl;
         ssh_channel_free(channel);
         ssh_disconnect(session);
         ssh_free(session);
@@ -30,7 +27,6 @@ void ShripSsh::channelExec(ssh_channel channel, std::string command) {
     int ec;
     ec = ssh_channel_request_exec(channel, command.c_str());
     if (ec != SSH_OK) {
-        std::cerr << "Failed to run command on SSH channel." << std::endl;
     }
 }
 

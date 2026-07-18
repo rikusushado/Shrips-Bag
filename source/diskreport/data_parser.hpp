@@ -10,4 +10,6 @@ struct TargetList {
     std::string key_path{"Unknown"};
 };
 
-std::vector<std::string> getConfig(std::string config_path);
+int parseOutputHelper(std::string output);
+
+std::vector<int> parseOutput(std::vector<std::string> output_matrix);
