@@ -1,4 +1,4 @@
-#include "warning_generator.hpp"
+#include "report_generator.hpp"
 #include "config_reader.hpp"
 
 #include <cstdint>
@@ -23,24 +23,27 @@ string read_file(string file_path)
     return content;
 }
 
-vector<string> loadLangChunks(std::string lang_dir_path) {
+vector<string> loadLangChunks(string config_path) {
+    string lang_dir_path = getLanaguagePath(config_path);
+
     vector<string> lang_chunks;
 
-    string head = lang_dir_path + "/" + "head.md";
-    string table = lang_dir_path + "/" + "table.md";
-    string foot = lang_dir_path + "/" + "foot.md";
+    string head = lang_dir_path + "/head.md";
+    string table = lang_dir_path + "/table.md";
 
     lang_chunks.push_back(read_file(head));
     lang_chunks.push_back(read_file(table));
-    lang_chunks.push_back(read_file(foot));
 
     return lang_chunks;
 }
 
-string generateWarning(vector<string> lang_chunks, vector<TargetList> target_list, vector<uint8_t> usage_matrix) {
+string generateWarning(string config_path, vector<int> usage_matrix) {
+    vector<string> lang_chunks = loadLangChunks(config_path);
+
     string warning_string = lang_chunks[0];
-    warning_string += "---\n";
     warning_string += lang_chunks[1];
+
+    vector<TargetList> target_list = getTargets(config_path);
 
     int count = 0;
     for ( auto target : target_list ) {
@@ -49,7 +52,7 @@ string generateWarning(vector<string> lang_chunks, vector<TargetList> target_lis
 
         if (usage >= treshold) {
             warning_string += "| ";
-            warning_string += "**" + target.name + "**";
+            warning_string += target.name;
 
             warning_string += " | ";
 
@@ -61,7 +64,6 @@ string generateWarning(vector<string> lang_chunks, vector<TargetList> target_lis
     }
 
     warning_string += "---\n";
-    warning_string += lang_chunks[2];
 
     time_t actual_time = std::time(nullptr);
     tm *local_time = std::localtime(&actual_time);

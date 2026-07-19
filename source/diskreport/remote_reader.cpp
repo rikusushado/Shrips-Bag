@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-std::string readUsage(std::string host, uint16_t port, std::string user, std::string key_path) {
+string readUsage(string host, uint16_t port, string user, string key_path) {
     auto session = ShripSsh::createSession();
     ShripSsh::sessionSetup(session, host, port, user);
 
@@ -20,23 +20,23 @@ std::string readUsage(std::string host, uint16_t port, std::string user, std::st
 
     ShripSsh::channelExec(channel, "df -h /");
 
-    std::string output = ShripSsh::channelOutput(channel);
+    string output = ShripSsh::channelOutput(channel);
 
     ShripSsh::sessionClose(session, channel, pubkey);
 
     return output;
 }
 
-std::vector<std::string> readUsageOnTargets(std::string config_path) {
+vector<string> readUsageOnTargets(string config_path) {
     auto target_list = getTargets(config_path);
 
-    std::vector<std::string> disk_free_readings;
+    vector<string> disk_free_readings;
 
     for (auto& target : target_list) {
         auto output = readUsage(target.address, target.port, target.user, target.key_path);
 
         if (output == "") {
-            std::cerr << "Failed to read storage usage on: " << target.name << std::endl;
+            cerr << "Failed to read storage usage on: " << target.name << endl;
         }
 
         disk_free_readings.push_back(output);

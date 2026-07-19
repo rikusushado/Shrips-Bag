@@ -8,7 +8,7 @@ ssh_session ShripSsh::createSession() {
     return session;
 }
 
-void ShripSsh::sessionSetup(ssh_session session, std::string host, uint16_t remote_port, std::string user) {
+void ShripSsh::sessionSetup(ssh_session session, string host, uint16_t remote_port, string user) {
     uint16_t port = remote_port;
     if (remote_port == 0) {
         port = 22;
@@ -21,6 +21,7 @@ void ShripSsh::sessionSetup(ssh_session session, std::string host, uint16_t remo
 
 void ShripSsh::authenticate(ssh_session session, ssh_key pubkey) {
     int ec;
+
     ec = ssh_userauth_publickey(session, nullptr, pubkey);
 
     if (ec != SSH_AUTH_SUCCESS) {

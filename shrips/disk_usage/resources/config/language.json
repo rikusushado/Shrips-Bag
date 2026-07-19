@@ -1,8 +1,0 @@
-{
-    "dictionary" :
-    {
-        "en" : "/opt/shrips-bag/lang/disk-usage/en/header.md",
-        "es" : "/opt/shrips-bag/lang/disk-usage/es/header.md",
-        "cat" : "/opt/shrips-bag/lang/disk-usage/cat/header.md"
-    }
-}

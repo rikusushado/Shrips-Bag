@@ -1,0 +1,8 @@
+{
+    "dictionary" :
+    [
+        ["cat", "/opt/shrips-bag/lang/disk-report/cat"],
+        ["es", "/opt/shrips-bag/lang/disk-report/es"],
+        ["en", "/opt/shrips-bag/lang/disk-report/en"]
+    ]
+}

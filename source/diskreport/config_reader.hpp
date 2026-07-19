@@ -4,22 +4,31 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 struct TargetList {
-    std::string name{"Unknown"};
+    string name{"Unknown"};
     uint8_t warning_treshold;
-    std::string address{"Unknown"};
+    string address{"Unknown"};
     uint16_t port{22};
-    std::string user{"Unknown"};
-    std::string key_path{"Unknown"};
+    string user{"Unknown"};
+    string key_path{"Unknown"};
 };
 
-std::vector<TargetList> getTargets(std::string config_path);
+vector<TargetList> getTargets(string config_path);
 
-using Language = std::string[2];
+using Language = string[2];
 
 struct LanguageData {
     char selected_lang[3];
-    std::vector<Language> lang_list;
+    vector<Language> lang_list;
 };
 
-std::string getLanaguagePath(std::string config_path);
+string getLanaguagePath(string config_path);
+
+struct NotifierConfig {
+    string tool_name{"Unknown"};
+    vector<string> tool_options{"Unknown"};
+};
+
+NotifierConfig getNotifierConfig(string config_path);

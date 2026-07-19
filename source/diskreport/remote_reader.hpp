@@ -5,6 +5,8 @@
 
 #include <libssh/libssh.h>
 
-std::string readUsage(std::string host, uint16_t port, std::string user, std::string key_path);
+using namespace std;
 
-std::vector<std::string> readUsageOnTargets(std::string config_path);
+string readUsage(string host, uint16_t port, string user, string key_path);
+
+vector<string> readUsageOnTargets(string config_path);

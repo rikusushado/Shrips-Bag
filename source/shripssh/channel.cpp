@@ -12,9 +12,7 @@ ssh_channel ShripSsh::createChannel(ssh_session session) {
 }
 
 void ShripSsh::channelOpen(ssh_session session, ssh_channel channel) {
-    int ec;
-
-    ec = ssh_channel_open_session(channel);
+    int ec = ssh_channel_open_session(channel);
 
     if (ec != SSH_OK) {
         ssh_channel_free(channel);
@@ -23,15 +21,12 @@ void ShripSsh::channelOpen(ssh_session session, ssh_channel channel) {
     }
 }
 
-void ShripSsh::channelExec(ssh_channel channel, std::string command) {
-    int ec;
-    ec = ssh_channel_request_exec(channel, command.c_str());
-    if (ec != SSH_OK) {
-    }
+void ShripSsh::channelExec(ssh_channel channel, string command) {
+    ssh_channel_request_exec(channel, command.c_str());
 }
 
-std::string ShripSsh::channelOutput(ssh_channel channel) {
-    std::string output = "";
+string ShripSsh::channelOutput(ssh_channel channel) {
+    string output = "";
     char buffer[(1024*64)];
     int nbytes;
 

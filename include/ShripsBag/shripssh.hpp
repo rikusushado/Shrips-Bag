@@ -1,13 +1,16 @@
+#pragma once
+
 #include <libssh/libssh.h>
 #include <string>
 
+using namespace std;
 
 struct ShripSsh {
     static ssh_session createSession();
 
-    static void sessionSetup(ssh_session session, std::string host, uint16_t remote_port, std::string user);
+    static void sessionSetup(ssh_session session, string host, uint16_t remote_port, string user);
 
-    static ssh_key keyFromFile(std::string key_path);
+    static ssh_key keyFromFile(string key_path);
 
     static void authenticate(ssh_session session, ssh_key pubkey);
 
@@ -15,9 +18,9 @@ struct ShripSsh {
 
     static void channelOpen(ssh_session session, ssh_channel channel);
 
-    static void channelExec(ssh_channel channel, std::string command);
+    static void channelExec(ssh_channel channel, string command);
 
-    static std::string channelOutput(ssh_channel channel);
+    static string channelOutput(ssh_channel channel);
 
     static void sessionClose(ssh_session session, ssh_channel channel, ssh_key pubkey);
 };

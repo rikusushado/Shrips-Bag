@@ -1,0 +1,35 @@
+#!/bin/bash
+
+OPT_FLAGS="-s -Os"
+
+SHRIP_SSH=1
+SHRIP_MSG=1
+DISK_REPORT=1
+
+for param in $@; do
+    if "$param" -E "-noshripssh"; then
+        SHRIP_SSH=0
+        echo -E "Warning: ShripSSH will not be built!\n"
+    elif "$param" -E "-noshripmsg"; then
+        SHRIP_MSG=0
+        echo -E "Warning: ShripMSG will not be built!"
+    elif "$param" -E "-nodiskreport"; then
+        echo -E "Warning: Disk Report will not be built!"
+        DISK_REPORT=0
+    fi
+done
+
+mkdir -p build/lib
+
+if $((SHRIP_SSH)); then
+    g++ -Iinclude -Isource/shripssh source/shripssh/key.cpp source/shripssh/session.cpp source/shripssh/channel.cpp -o build/lib/librukkyssh.so -static "${OPT_FLAGS}"
+fi
+
+if $((SHRIP_MSG)); then
+    g++ -Iinclude -Isource/shripmsg source/shripmsg/zulip_send.cpp -o build/lib/librukkymsg.so -static "${OPT_FLAGS}"
+fi
+
+mkdir -p build/bin
+if $((DISK_REPORT)); then
+    g++ -Iinclude -Isource/diskreport source/diskreport/config_reader.cpp source/diskreport/remote_reader.cpp source/diskreport/data_parser.cpp source/diskreport/report_generator.cpp source/diskreport/report_transport.cpp source/diskreport/main.cpp -o build/bin/disk-report -static "${OPT_FLAGS}"
+fi

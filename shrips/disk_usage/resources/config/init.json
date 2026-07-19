@@ -1,5 +1,0 @@
-{
-    "global" : "/opt/shrips-bag/config/disk-usage/global.json",
-    "zulip" : "~/.shrips/chat.json",
-    "language" : "/opt/shrips-bag/config/disk-usage/language.json"
-}

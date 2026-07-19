@@ -1,8 +1,8 @@
 #include "data_parser.hpp"
 #include <list>
 
-int parseOutputHelper(std::string output) {
-    std::list<char> numbers;
+int parseOutputHelper(string output) {
+    list<char> numbers;
     ssize_t count = 0;
 
     for (char item : output) {
@@ -24,19 +24,17 @@ int parseOutputHelper(std::string output) {
     }
 
     int usage;
-
     for (char c : numbers) {
-        uint8_t i = c - '0';
-        usage <<= i;
+        usage <<= c - '0';
     }
 
     return usage;
 }
 
-std::vector<int> parseOutput(std::vector<std::string> output_matrix) {
-    std::vector<int> usage_matrix;
+vector<int> parseOutput(vector<string> output_matrix) {
+    vector<int> usage_matrix;
 
-    for (std::string output : output_matrix) {
+    for (string output : output_matrix) {
         auto usage = parseOutputHelper(output);
 
         usage_matrix.push_back(usage);
